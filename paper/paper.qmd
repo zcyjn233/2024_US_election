@@ -249,8 +249,107 @@ This study underscores the complexities of election forecasting, where data qual
 \appendix
 
 # Appendix {-}
+##First Appendix: 
+Methodology of the Times/Siena Poll
+The Times/Siena poll aims to assess the perspectives of registered U.S. voters on key electoral topics. Conducted from June 28 to July 2, 2024, this telephone survey included responses from 1,532 registered voters, with 93% reached on cell phones to capture a representative sample. The survey's frame relied on a list of registered voters, adjusted demographically to ensure balance across variables such as party affiliation, race, region, and more, thereby approximating the characteristics of the voting population.
+
+Population, Frame, and Sample
+The survey targets registered voters across the United States, using a stratified random sample from the L2 voter file. This stratification included state, party, race, age, and other demographic and socio-political characteristics, ensuring that subgroups were proportionally represented. Each state’s share of records was adjusted based on prior response models to reduce nonresponse bias.
+
+Sample Recruitment and Sampling Approach
+The sample was recruited via telephone, leveraging both live English and Spanish interviews to cater to linguistic diversity. Weighting adjustments were applied to ensure that underrepresented groups, such as non-college-educated individuals, were accurately reflected in the results. This stratified sampling approach aims to counter biases inherent in voluntary surveys but introduces complexities in weight calibration, particularly across demographic and behavioral variables.
+
+Non-Response Handling
+The poll employs various adjustments to address nonresponse, including modeling selection weights based on expected response rates by demographic strata. This approach mitigates some nonresponse bias by assigning higher weights to demographic groups typically less responsive in surveys. However, the methodology acknowledges residual nonresponse error, an unavoidable aspect in polling.
+
+Questionnaire Design: Strengths and Weaknesses
+The questionnaire was comprehensive, covering key demographic and electoral questions. The translation into Spanish and use of bilingual interviewers reduced language barriers. However, the reliance on self-reported data, particularly for sensitive demographic information, may introduce response bias. Additionally, weighting adjustments for party affiliation, education, and other variables help align the sample with the voting population but can complicate comparisons across polls with different methodologies.
+
+Strengths and Limitations
+The poll's methodology enhances representativeness through stratified sampling and robust weighting. However, it remains vulnerable to sampling error (±2.8 points) and design effects due to weighting adjustments. While the methodology captures a broad spectrum of voter demographics, potential biases may still arise from response variability and the limits of telephone-based recruitment, especially in reaching younger, more mobile populations.
+Overall, the Times/Siena poll's approach is rigorous, with explicit adjustments to counter demographic disparities. Still, like any survey, it carries limitations in sample coverage and nonresponse adjustment, which must be considered when interpreting its findings.
+
+##Second Appendix
+Google form link: https://forms.gle/VwM8ogd6efeCTtVq9
+
+Idealized Methodology
+
+Objective:
+The goal of this study is to provide a robust and accurate forecast of the U.S. presidential election by collecting representative data on voter preferences, key issues, and likely turnout. This involves obtaining data from a diverse cross-section of eligible voters across demographic and geographic segments, ensuring the data reflects the broader voting population’s sentiment and preferences.
+
+Budget:
+The total budget allocated for this project is $100,000, which covers expenses for sample acquisition, data collection, respondent recruitment, validation, and post-processing.
+
+Sampling Approach:
+1.Target Population:
+1.1.The target population is U.S. citizens aged 18 and older who are eligible to vote in the upcoming presidential election. This includes both registered voters and those eligible but unregistered, to capture a complete picture of potential voter sentiment.
+
+2.Sampling Frame:
+2.1.The sampling frame consists of two main sources: state voter registration files for registered voters and a supplementary frame sourced from a national sample provider to cover eligible unregistered voters. This approach ensures inclusivity of all potential voters, addressing potential biases introduced by limiting to only registered voters.
+
+3.Sample Size and Allocation:
+3.1.Sample Size: The goal is to collect responses from 5,000 individuals. This sample size allows for a national margin of error of ±2%, providing a high level of precision for forecasting.
+2.Stratification: The sample will be stratified by key demographic variables, including age, gender, education level, geographic region, and race/ethnicity, to ensure representativeness. Each demographic stratum will be proportionate to its presence in the voting-eligible population, allowing for accurate demographic weighting.
+
+Recruitment of Respondents:
+Online Panel:
+oThe primary recruitment will be through an online panel provider, known for its extensive and diverse pool of respondents. This method is cost-effective and allows for rapid data collection. Respondents will be randomly selected within each stratum to reduce sampling bias.
+oAdditionally, targeted online ads on social media platforms and other digital channels will be used to recruit younger and more digitally-engaged demographics who might be underrepresented in traditional polling methods.
+
+Telephone Surveys:
+oFor older demographics and populations with lower internet access, 20% of the budget will be allocated to conducting live telephone interviews. This ensures that we reach a representative sample that includes individuals less likely to participate online, such as older adults and rural residents.
+Data Collection Platform: The online survey will be hosted on a robust survey platform, such as Google Forms or SurveyMonkey, which offers customizable response validation, skip logic, and data export functionalities. Telephone interviews will be conducted through a call center using a computer-assisted telephone interviewing (CATI) system, allowing for real-time data entry and minimizing data entry errors.
+
+Data Validation:
+Duplicate Response Prevention:
+oOnline responses will be limited to one submission per respondent by using unique response codes and IP tracking. For added security, panelists will also be screened by the panel provider for duplicate entries.
+Data Quality Checks:
+oAttention checks (e.g., “Please select option B”) will be embedded within the survey to identify and exclude disengaged or inattentive respondents.
+oConsistency checks will be applied to ensure logical coherence in responses. For example, respondents claiming to be under 18 will be automatically excluded, and responses where demographic details conflict (e.g., age with claimed years of voting) will be flagged for review.
+
+Cross-Verification:
+oA random subsample of respondents will be verified using public records or voter files where permissible, to ensure accuracy in self-reported data such as registration status.
+Weighting and Adjustments:
+
+Post-Stratification Weighting:
+oAfter data collection, weights will be applied to adjust for demographic imbalances. This will involve weighting each respondent according to their demographic group’s proportion in the population (e.g., age, race, gender, and region), ensuring that the final sample mirrors the U.S. voting-eligible population.
+
+Likely Voter Modeling:
+oLikely voter models will be created based on respondents’ self-reported voting intention and historical turnout data. Respondents who express strong intent to vote and have a history of voting in past elections will be weighted more heavily, following patterns observed in past elections.
+
+Poll Aggregation:
+Multi-Method Integration:
+oResults from the online and telephone samples will be aggregated, with weighting adjustments to align with the demographic and likely voter profiles of each group. This approach combines the strengths of both online and telephone methods, ensuring representation across all segments.
+
+Rolling Average Smoothing:
+oTo minimize daily variability, responses will be aggregated using a rolling average over multiple days, providing a smoother trendline and reducing the influence of outliers.
 
 
+Idealized Survey
+Below is a comprehensive structure of the survey questions, organized to cover eligibility, demographics, political affiliation, and voting preferences in a logical flow. A Google Forms link will be created to host this survey for actual implementation.
+
+Survey Name:
+2024 U.S. Presidential Voter Sentiment Survey
+Survey Introduction:
+Welcome to the 2024 U.S. Presidential Voter Sentiment Survey. As the nation prepares for the upcoming presidential election, this survey aims to gather insights into the opinions, preferences, and key issues that matter most to voters like you. Your responses will help us understand voter priorities and forecast trends in the lead-up to the election. This survey is anonymous, and all information will be used solely for research purposes. The survey has a total of 8 parts. It should take about 10 minutes to complete. 
+Complete Survey Questions are in the Google Form Link: https://forms.gle/VwM8ogd6efeCTtVq9 
+
+
+
+Pollster Methodology Overview and Evaluation
+Selected Pollster: Times/Siena College Poll
+
+Population, Frame, and Sample:
+Population: U.S. registered and likely voters, providing insights into the general electorate and potential turnout trends.
+Frame: The sample frame is primarily based on state voter registration files. Additional demographic information is sourced to enhance stratification accuracy.
+Sample: Stratified sample targeting key demographics such as age, race, gender, education, and region, ensuring comprehensive representation across different voter segments.
+Recruitment Approach:
+The pollster combines live phone interviews with an online survey option, covering diverse respondent preferences and accessibility levels. This mixed-method approach allows for a more inclusive sample, reaching those who may not engage in a single mode survey.
+Sampling Approach:
+Stratified Sampling: Each stratum (age, race, gender, region, education) is proportionate to its population weight, minimizing sampling bias and ensuring all segments are well-represented.
+Trade-Offs: While stratification improves representativeness, it adds logistical complexity and cost. Additionally, despite stratification, some demographics (e.g., young voters) may still have lower response rates, requiring careful weighting.
+Non-Response Handling:
+The pollster applies post-stratification weights to account for non-response, based on voter file data to ensure representativeness. Although weighting mitigates non-response bias, some residual effects may persist, particularly for hard-to-reach groups like young and transient voters.
 # Additional data details
 
 # Model details {#sec-model-details}
@@ -271,15 +370,6 @@ In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. Th
 #| fig-cap: "Examining how the model fits, and is affected by, the data"
 #| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
 
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
 ```
 
 ## Diagnostics
