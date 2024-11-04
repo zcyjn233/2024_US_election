@@ -15,38 +15,27 @@ set.seed(853)
 
 
 #### Simulate data ####
-# State names
-states <- c(
-  "New South Wales",
-  "Victoria",
-  "Queensland",
-  "South Australia",
-  "Western Australia",
-  "Tasmania",
-  "Northern Territory",
-  "Australian Capital Territory"
-)
+# Load necessary library
+library(dplyr)
 
-# Political parties
-parties <- c("Labor", "Liberal", "Greens", "National", "Other")
+# Read the dataset
+analysis_data <- read_parquet("/Users/lucky/Desktop/paper-2/data/02-analysis_data/DT.parquet")
 
-# Create a dataset by randomly assigning states and parties to divisions
-analysis_data <- tibble(
-  division = paste("Division", 1:151),  # Add "Division" to make it a character
-  state = sample(
-    states,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.25, 0.25, 0.15, 0.1, 0.1, 0.1, 0.025, 0.025) # Rough state population distribution
-  ),
-  party = sample(
-    parties,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.40, 0.40, 0.05, 0.1, 0.05) # Rough party distribution
-  )
-)
+# Inspect the structure of the 'pct' column to get a sense of the distribution
+summary(data$pct)
+
+# Set parameters for the distribution, using mean and standard deviation from actual data
+mean_pct <- mean(data$pct, na.rm = TRUE)
+sd_pct <- sd(data$pct, na.rm = TRUE)
+
+# Simulate new candidate percentages based on a normal distribution
+# Setting limits to keep values between 0 and 100 to ensure valid percentages
+data$simulated_pct <- pmax(pmin(rnorm(n = nrow(data), mean = mean_pct, sd = sd_pct), 100), 0)
+
+# View a summary of the simulated percentages
+summary(data$simulated_pct)
+
 
 
 #### Save data ####
-write_csv(analysis_data, "data/00-simulated_data/simulated_data.csv")
+write_csv(analysis_data, "/Users/lucky/Desktop/paper-2/data/00-simulated_data/simulated_data.csv")
