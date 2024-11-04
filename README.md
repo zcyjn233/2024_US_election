@@ -1,9 +1,5 @@
-# Starter folder
-
 ## Overview
-
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
-
+This project aims to forecast the 2024 U.S. presidential election by analyzing polling data focused on Donald Trump. Our goal is to understand how different polling methodologies—such as sampling approaches, demographic weighting, and likely voter models—impact the accuracy of election predictions. Using high-quality polling data, custom R code for data cleaning and analysis, and an idealized survey design, we assess key factors influencing voter sentiment and forecast accuracy.
 
 ## File Structure
 
@@ -19,12 +15,5 @@ The repo is structured as:
 
 ## Statement on LLM usage
 
-Aspects of the code were written with the help of the auto-complete tool, Codriver. The abstract and introduction were written with the help of ChatHorse and the entire chat history is available in inputs/llms/usage.txt.
+Aspects of the code were written with the help of the auto-complete tool, ChatGPT. Part of the coding were written with the help of ChatGPT and the entire chat history is available in other/llms/usage.txt.
 
-## Some checks
-
-- [ ] Change the rproj file name so that it's not starter_folder.Rproj
-- [ ] Change the README title so that it's not Starter folder
-- [ ] Remove files that you're not using
-- [ ] Update comments in R scripts
-- [ ] Remove this checklist
