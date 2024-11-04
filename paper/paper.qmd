@@ -1,13 +1,13 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Analysis of Trump Support Trends in 2024: A High-Quality Polling Comparison"
+subtitle: "Tracking Trends: Variations in Donald Trump’s Polling Percentages by Date, Pollster, and Poll Quality Leading to the 2024 Election"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: [https://github.com/RohanAlexander/starter_folder](https://github.com/RohanAlexander/starter_folder)."
+  - Wei Wang
+  - Chiyue Zhuang
+thanks: "Code and data are available at: [https://github.com/zcyjn233/2024_US_election)."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This project analyzes polling data to forecast the 2024 U.S. presidential election, focusing on how sampling, demographic weighting, and likely voter models influence predictions. We find that pollster methodologies and voter turnout models significantly impact forecast accuracy. This research highlights the complexities of polling and the need for careful methods to capture true voter sentiment. Improving these methods can lead to more reliable election forecasts, helping the public and decision-makers better understand electoral dynamics."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -17,85 +17,123 @@ bibliography: references.bib
 #| include: false
 #| warning: false
 #| message: false
-
 library(tidyverse)
 library(palmerpenguins)
+library(plyr)
+library(ggiraph)
+library(ggiraphExtra)
+library(rstanarm)
+library(ggplot2)
+library(arrow)
+library(broom)
+library(modelsummary)
 ```
 
 
 # Introduction
+As the 2024 presidential election draws near, polling data serves as a vital gauge of public opinion and electoral prospects. While polls offer a snapshot of a candidate’s standing, variations among polling organizations and methodologies often complicate the interpretation of results. For candidates like Donald Trump, whose public perception remains polarizing, such differences can lead to considerable disparities in reported polling percentages. This paper examines how Trump’s poll percentages have fluctuated from July 2024 to the present, highlighting the influence of polling dates, differences between pollsters, and variations in poll quality on these reported figures.
 
-Overview paragraph
 
-Estimand paragraph
 
-Results paragraph
+##Overview
+This study uses a data-driven approach to analyze and visualize Donald Trump’s polling trends, focusing on high-quality polls (those with a pollster rating of at least 2.8) to ensure reliability. We chart Trump’s polling percentages over time, compare differences across various polling organizations, and assess how poll quality scores (pollscore) may affect the reported values. The data is filtered to isolate responses solely for Donald Trump and within the specified timeframe to provide a precise, consistent view.
 
-Why it matters paragraph
+
+
+##Estimand
+The estimand of this study is the temporal trend in Donald Trump’s polling percentage, as influenced by pollster identity and poll quality, leading up to the 2024 election. The analysis seeks to estimate Trump’s changing support across reputable polls, uncovering trends that may reveal shifts in voter sentiment and the reliability of polling methodologies.
+
+
+##Results
+Our analysis highlights several key findings:
+
+1.There are noticeable fluctuations in Trump’s polling percentage over time, revealing trends that align or contrast across different polling dates.
+
+2.Variation exists between pollsters, with some organizations reporting consistently higher or lower values for Trump, which may suggest methodological differences or sample biases.
+
+3.Higher-quality polls (as indicated by pollscore) tend to show a more stable trend line, suggesting that poll quality plays a role in the reliability of reported figures.
+
+##Why It Matters
+Understanding these variations is essential for interpreting poll data accurately, particularly in a polarized political environment. This analysis underscores the necessity of considering poll quality and pollster methodology when assessing a candidate's standing. For policymakers, media, and the public, a nuanced comprehension of polling trends can inform more balanced expectations about the election outcomes. Furthermore, this research highlights the critical gap in how polling data is often interpreted without accounting for these influencing factors.
+
 
 Telegraphing paragraph: The remainder of this paper is structured as follows. @sec-data....
-
-
-
 
 
 
 # Data {#sec-data}
 
 ## Overview
-
-We use the statistical programming language R [@citeR].... Our data [@shelter].... Following @tellingstories, we consider...
-
-Overview text
+This study uses a dataset of U.S. presidential polls focused on Donald Trump, including only high-quality polls (with pollster ratings of 2.8 or above) conducted from July 2024 onward. This filter ensures reliability, minimizing bias from lower-quality polls. Each entry includes information on polling organization, sponsors, sample sizes, poll dates, pollster ratings, and Trump’s support percentage. To enhance interpretability, Trump’s polling percentage was also converted to an estimated number of supporters, where sample sizes were provided, allowing for a clearer sense of scale. While alternative datasets were considered, they included lower-quality polls or other candidates, making them less suitable for this focused analysis.
 
 ## Measurement
-	
-Some paragraphs about how we go from a phenomena in the world to an entry in the dataset.
+The dataset represents collected data points from polling organizations, aiming to measure voter sentiment regarding Donald Trump’s candidacy in the 2024 presidential election. The original data points reflect reported percentages from samples of registered voters or likely voters, depending on the pollster. Each polling organization applies its methodology to measure support levels, which can include specific sampling techniques (random digit dialing, online panels, or stratified sampling) and adjustments for demographic representativeness. These methodologies are distilled into a single percentage value (pct), indicating the proportion of surveyed respondents expressing support for Trump.
 
-## Outcome variables
+Poll quality, represented by the variable pollscore, provides a standardized assessment of each poll’s reliability, helping to filter out results from polls deemed less robust. This pollscore, assigned on a scale and informed by past performance and adherence to methodological standards, ensures that higher-scoring polls in the dataset represent a more reliable measure of Trump’s support. Poll scores were sourced directly from the polling organizations, and we retained only those polls with scores of 2.8 or higher. For polls missing sample sizes, the conversion to num_trump was infeasible, meaning only those polls with full data were converted to this variable for consistency in measuring actual support estimates.
 
-Add graphs, tables and text. Use sub-sub-headings for each outcome variable or update the subheading to be singular.
-
+The dataset also underwent targeted cleaning steps: missing values in the state column were labeled as “National,” reflecting broader, non-state-specific polls, while only polls after a specific date were retained. The data was additionally processed to ensure date variables were in a standardized format to facilitate chronological analysis.
 
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+## Outcome variables & Results
+The primary outcome variable for this study is Trump’s polling percentage (pct) over time. This variable serves as the primary indicator of voter support, capturing changes in Trump’s approval or disapproval among the electorate in the months leading up to the 2024 election. To give a clearer picture of trends and variability, several analyses were performed on this variable, with results visualized in graphs and tables.
+
+1.Trump Support Percentage Over Time
+A scatter plot of Trump’s polling percentages (pct) over time was generated to visualize trends. This plot, accompanied by a smoothed trend line, shows that Trump’s polling percentages have experienced fluctuations since July 2024, possibly reflecting evolving voter sentiment. In some periods, we observe slight upward trends, while others show a decline, indicating shifts in voter attitudes potentially correlated with campaign events or external factors.
+
+2.Trump Support by Pollster
+Another analysis grouped polling data by pollscore, with each point color-coded according to its quality score. Higher-scoring polls showed more stable and consistent trends, underscoring the importance of quality metrics in interpreting polling data. Lower-scoring polls tended to be more variable, suggesting that methodological differences or sample sizes could impact consistency.
+
+Together, these analyses underscore the variability and complexity inherent in interpreting polling data, particularly for polarizing candidates like Donald Trump. Visualizations of these variables offer insights into not only Trump’s support levels but also the influence of polling methodologies and quality on reported results. These findings highlight the necessity of critically evaluating polling data by considering both quality and context.
 
 ```{r}
-#| label: fig-bills
+#| label: Trump Support Percentage Over Time
 #| fig-cap: Bills of penguins
 #| echo: false
+df <- read_parquet("/Users/lucky/Desktop/paper-2/data/02-analysis_data/DT.parquet")
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+base_plot <- ggplot(df, aes(x = end_date, y = pct)) +
+  theme_classic() +
+  labs(y = "Trump percent", x = "Date")
+# Plots poll estimates and overall smoothing
+base_plot +
+  geom_point() +
+  geom_smooth()
+# Color by pollster
+# This gets messy - need to add a filter - see line 21
+base_plot +
+  geom_point(aes(color = pollster)) +
+  geom_smooth() +
+  theme(legend.position = "bottom")
+# Facet by pollster
+
 ```
 
-Talk more about it.
+The first plot provides a visual overview of Donald Trump’s support percentage across various dates from July 2024 onward, with each data point representing an individual poll. The trend line overlays these points to reveal the general trajectory of Trump’s support. While individual polls show fluctuations, the trend remains fairly consistent, suggesting a stable base of support despite temporary rises and falls that may coincide with specific political events, media coverage, or public statements. The steadiness of this trend indicates that Trump’s core supporters may be relatively unaffected by short-term news cycles, while any significant spikes or dips could reflect reactions to impactful news events or campaign activities. This visualization underscores the importance of observing both individual polling results and overarching trends, as short-term fluctuations can misrepresent the stability or shifts in support when viewed in isolation.
 
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
 
 ```{r}
-#| label: fig-planes
+#| label: Trump Support by Pollster
 #| fig-cap: Relationship between wing length and width
 #| echo: false
 #| warning: false
 #| message: false
 
-analysis_data <- read_csv(here::here("data/02-analysis_data/analysis_data.csv"))
+df <- read_parquet("/Users/lucky/Desktop/paper-2/data/02-analysis_data/DT.parquet")
 
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
+base_plot +
+  geom_point() +
+  geom_smooth() +
+  facet_wrap(vars(pollster))
+# Color by pollscore
+base_plot +
+  geom_point(aes(color = factor(pollscore))) +
+  geom_smooth() +
+  theme(legend.position = "bottom")
 ```
 
-Talk way more about it. 
+The second plot introduces color-coding to distinguish pollsters, illustrating how different polling organizations report varying levels of support for Trump. This variance highlights the methodological diversity among pollsters, as each organization’s unique sample selection and polling practices can yield different estimates. Certain pollsters consistently report higher or lower support levels, which may be attributable to demographic differences, regional focuses, or weighting adjustments that influence results. This plot also underscores the value of selecting high-quality polls (those rated 2.8 and above) to minimize biases, though even highly rated pollsters may apply differing approaches. By presenting this color-coded differentiation, the plot visually emphasizes the need for a critical assessment of each pollster’s methodology, illustrating how these methodological nuances can lead to divergences in reported support despite similar polling periods.
+
+ 
 
 ## Predictor variables
 
@@ -151,8 +189,8 @@ Our results are summarized in @tbl-modelresults.
 
 library(rstanarm)
 
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
+linear.model2 <-
+  readRDS(file = here::here("/Users/lucky/Desktop/paper-2/models/linear.model2.rds"))
 ```
 
 ```{r}
@@ -176,19 +214,35 @@ modelsummary::modelsummary(
 
 # Discussion
 
-## First discussion point {#sec-first-point}
+##Overview of the Study
+This project aimed to forecast the 2024 U.S. presidential election by analyzing polling data specific to Donald Trump, leveraging both quantitative analysis and methodological scrutiny. We developed an idealized survey and proposed a comprehensive methodology for gathering high-quality, representative data on voter sentiment. The study used a detailed dataset and R code models to clean, process, and analyze polling trends. Additionally, we examined the methodologies of notable pollsters, focusing on how sample composition, polling methods, and weighting affect election predictions.
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+##Key Insights
+Understanding Polling Trends and Methodologies
+One key takeaway from this study is the critical role of methodological rigor in polling accuracy. By focusing on high-quality polls and analyzing variations by pollster, we observed how different polling organizations, sample sources, and demographic weighting can impact reported support levels for candidates. This reveals that poll results are not solely a reflection of public sentiment but are also shaped by methodological choices, making it essential to consider poll quality and methodology when interpreting results.
 
-## Second discussion point
+The Importance of Voter Demographics and Likely Voter Models
+Another significant insight is the impact of demographic and likely voter modeling on forecast accuracy. Our analysis highlighted that demographic weighting and stratified sampling are crucial for representing diverse voter segments accurately. In particular, likely voter models, which adjust weights based on historical turnout and self-reported voting intentions, are essential for refining predictions as they capture the most probable voter behaviors. This approach enhances forecast reliability, especially in a polarized election where turnout variability could influence outcomes.
 
-Please don't use these as sub-heading labels - change them to be what your point actually is.
+##Limitations and Challenges
+Data Quality and Non-Response Bias
+Despite a robust methodology, certain limitations persist. Non-response bias remains a challenge, particularly among demographics less inclined to participate in surveys (e.g., younger voters, certain racial minorities). Although weighting partially mitigates this bias, it cannot fully substitute for missing responses, which may skew results. Additionally, reliance on self-reported data for likely voter models introduces a risk of over- or under-estimating actual turnout, as individuals may not always follow through on their expressed intentions to vote.
 
-## Third discussion point
+Pollster Variation and Sampling Constraints
+Another limitation lies in the inherent variation between pollsters. Despite efforts to standardize methods, each polling organization has its unique approach to sampling and weighting, which can lead to differing results. While poll aggregation can reduce these discrepancies, it does not fully eliminate the variability introduced by each pollster’s specific methodology. Moreover, the idealized survey approach proposed in this study, though comprehensive, may face logistical and financial constraints in real-world applications, limiting its scalability and representativeness.
 
-## Weaknesses and next steps
+##Future Directions
+Improving Non-Response Handling and Engagement
+Future research should explore more innovative methods to reduce non-response bias and increase survey engagement, particularly among traditionally underrepresented demographics. Techniques like adaptive sampling and the use of digital incentives could improve response rates in online panels. Additionally, incorporating more robust data validation techniques can further enhance data accuracy.
 
-Weaknesses and next steps should also be included.
+Enhancing Poll Aggregation Techniques
+To address pollster variation, further development of poll aggregation techniques could provide a more unified and reliable estimate of voter sentiment. Machine learning algorithms, for instance, could be employed to adjust for systematic biases across pollsters, providing a refined average that accounts for pollster-specific errors. Incorporating historical polling accuracy data into these models could also improve forecast reliability.
+
+Exploring Alternative Data Sources
+Future election forecasting models may benefit from supplementing traditional polling data with alternative sources, such as social media sentiment analysis and web search trends. These sources can provide real-time indicators of public opinion shifts, complementing traditional polls and potentially capturing early signs of changes in voter sentiment.
+
+##Conclusion
+This study underscores the complexities of election forecasting, where data quality, methodology, and demographic modeling all play critical roles. While our idealized survey and analysis provide valuable insights, the evolving nature of voter behavior and the unique challenges of each election cycle mean that continuous refinement of methods is essential. By addressing limitations and integrating new data sources, future research can build on these findings to enhance the accuracy and robustness of election predictions.
 
 \newpage
 
