@@ -1,9 +1,8 @@
-#### Preamble ####
-# Purpose: Tests the structure and validity of the simulated Australian 
+# Purpose: Tests the simulate data
   #electoral divisions dataset.
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Author: Wei Wang , Chiyue Zhuang
+# Date: 4 November 2024
+# Contact: won.wang@mail.utoronto.ca, chiyue.zhuang@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: 
   # - The `tidyverse` package must be installed and loaded
@@ -13,77 +12,57 @@
 
 #### Workspace setup ####
 library(tidyverse)
+library(testthat)
+library(readr)
+library(dplyr)
+# Load the dataset
+dataset <- read_csv("/Users/lucky/Desktop/paper-2/data/00-simulated_data/simulated_data.csv")
 
-analysis_data <- read_csv("data/00-simulated_data/simulated_data.csv")
+##test 1
+test_that("Dataset has the expected structure", {
+  
+  # 1. Check for expected columns
+  expected_columns <- c("column1", "column2", "column3")  # Replace with actual column names
+  actual_columns <- colnames(dataset)
+  
+  expect_setequal(actual_columns, expected_columns)
+  
+  # 2. Check data types for each column
+  # Replace `numeric` and `character` with the expected types for each column
+  expect_type(dataset$column1, "numeric")
+  expect_type(dataset$column2, "character")
+  expect_type(dataset$column3, "numeric")
+  
+  # 3. Check for missing values (optional)
+  expect_true(all(!is.na(dataset)))
+})
 
-# Test if the data was successfully loaded
-if (exists("analysis_data")) {
-  message("Test Passed: The dataset was successfully loaded.")
-} else {
-  stop("Test Failed: The dataset could not be loaded.")
-}
-
-
-#### Test data ####
-
-# Check if the dataset has 151 rows
-if (nrow(analysis_data) == 151) {
-  message("Test Passed: The dataset has 151 rows.")
-} else {
-  stop("Test Failed: The dataset does not have 151 rows.")
-}
-
-# Check if the dataset has 3 columns
-if (ncol(analysis_data) == 3) {
-  message("Test Passed: The dataset has 3 columns.")
-} else {
-  stop("Test Failed: The dataset does not have 3 columns.")
-}
-
-# Check if all values in the 'division' column are unique
-if (n_distinct(analysis_data$division) == nrow(analysis_data)) {
-  message("Test Passed: All values in 'division' are unique.")
-} else {
-  stop("Test Failed: The 'division' column contains duplicate values.")
-}
-
-# Check if the 'state' column contains only valid Australian state names
-valid_states <- c("New South Wales", "Victoria", "Queensland", "South Australia", 
-                  "Western Australia", "Tasmania", "Northern Territory", 
-                  "Australian Capital Territory")
-
-if (all(analysis_data$state %in% valid_states)) {
-  message("Test Passed: The 'state' column contains only valid Australian state names.")
-} else {
-  stop("Test Failed: The 'state' column contains invalid state names.")
-}
-
-# Check if the 'party' column contains only valid party names
-valid_parties <- c("Labor", "Liberal", "Greens", "National", "Other")
-
-if (all(analysis_data$party %in% valid_parties)) {
-  message("Test Passed: The 'party' column contains only valid party names.")
-} else {
-  stop("Test Failed: The 'party' column contains invalid party names.")
-}
-
-# Check if there are any missing values in the dataset
-if (all(!is.na(analysis_data))) {
-  message("Test Passed: The dataset contains no missing values.")
-} else {
-  stop("Test Failed: The dataset contains missing values.")
-}
-
-# Check if there are no empty strings in 'division', 'state', and 'party' columns
-if (all(analysis_data$division != "" & analysis_data$state != "" & analysis_data$party != "")) {
-  message("Test Passed: There are no empty strings in 'division', 'state', or 'party'.")
-} else {
-  stop("Test Failed: There are empty strings in one or more columns.")
-}
-
-# Check if the 'party' column has at least two unique values
-if (n_distinct(analysis_data$party) >= 2) {
-  message("Test Passed: The 'party' column contains at least two unique values.")
-} else {
-  stop("Test Failed: The 'party' column contains less than two unique values.")
-}
+##test 2
+test_that("Statistical summaries match expected ranges", {
+  
+  # 1. Check the mean of column1 is within an expected range
+  column1_mean <- mean(dataset$column1, na.rm = TRUE)
+  expect_gte(column1_mean, 10)  # Expected lower bound
+  expect_lte(column1_mean, 20)  # Expected upper bound
+  
+  # 2. Check the median of column2 falls within an expected range
+  column2_median <- median(dataset$column2, na.rm = TRUE)
+  expect_gte(column2_median, 5)
+  expect_lte(column2_median, 15)
+  
+  # 3. Validate that the max value of column3 does not exceed a threshold
+  column3_max <- max(dataset$column3, na.rm = TRUE)
+  expect_lte(column3_max, 100)
+  
+  # 4. Test that the standard deviation of column1 is within a reasonable range
+  column1_sd <- sd(dataset$column1, na.rm = TRUE)
+  expect_gte(column1_sd, 0)
+  expect_lte(column1_sd, 10)
+  
+  # 5. Verify that the sum of column4 meets an expected value
+  column4_sum <- sum(dataset$column4, na.rm = TRUE)
+  expect_equal(column4_sum, 500, tolerance = 0.1)  # Adjust tolerance as needed
+  
+  # 6. Check that no negative values are present in a specific column
+  expect_true(all(dataset$column1 >= 0))
+})
