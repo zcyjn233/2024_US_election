@@ -1,11 +1,8 @@
-#### Preamble ####
-# Purpose: Models... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
-# License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+
+# Purpose: Models
+# Author: Wei Wang , Chiyue Zhuang
+# Date: 4 November 2024
+# Contact: won.wang@mail.utoronto.ca, chiyue.zhuang@mail.utoronto.ca
 
 
 #### Workspace setup ####
