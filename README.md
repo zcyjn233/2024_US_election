@@ -1,3 +1,4 @@
+2024_US_election
 ## Overview
 This project aims to forecast the 2024 U.S. presidential election by analyzing polling data focused on Donald Trump. Our goal is to understand how different polling methodologies—such as sampling approaches, demographic weighting, and likely voter models—impact the accuracy of election predictions. Using high-quality polling data, custom R code for data cleaning and analysis, and an idealized survey design, we assess key factors influencing voter sentiment and forecast accuracy.
 
